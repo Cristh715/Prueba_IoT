@@ -29,7 +29,7 @@ model.eval()
 model.conf = CONF_THRESH
 
 # Variables
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('plates.mp4')
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
 
@@ -56,6 +56,7 @@ def detectar_vehiculo(frame):
     for det in pred:
         if len(det):
             det[:, :4] = scale_boxes(img_tensor.shape[2:], det[:, :4], frame.shape).round()
+            print("detectado")
             hay_vehiculo = True
 
     return hay_vehiculo, frame
@@ -68,9 +69,10 @@ def capturar():
         ret, frame = cap.read()
         if not ret:
             continue
-
+        
         frame_index += 1
         if frame_index % FRAME_SKIP_COUNT == 0:
+            print(f"frame: {frame_index}\n")
             hay_vehiculo, frame = detectar_vehiculo(frame)
             if hay_vehiculo:
                 vehiculo_detectado = True
