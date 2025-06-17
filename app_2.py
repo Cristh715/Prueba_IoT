@@ -106,5 +106,16 @@ if __name__ == '__main__':
     t.daemon = True
     t.start()
 
-    print("Captura en marcha, enviando frames al servidor cuando se detecta vehículo.")
-    cap.release()
+    print("Captura en marcha. Esperando detecciones para enviar frames al servidor.")
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("\nDeteniendo la aplicación por interrupción del usuario...")
+    except Exception as e:
+        print(f"Se produjo un error inesperado en el hilo principal: {e}")
+    finally:
+        if cap.isOpened():
+            cap.release()
+            print("Recursos de video liberados.")
