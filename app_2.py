@@ -20,7 +20,7 @@ FRAME_SKIP_COUNT = 30
 YOLO_PATH = '/home/admin/yolov5/yolov5n.pt' 
 CLASSES_VEHICLES = [2, 3, 5, 7]
 CONF_THRESH = 0.4
-SERVER_URL = 'http://192.168.18.176:5000/video_feed'
+SERVER_URL = 'http://192.168.18.176:5000/upload_frame'
 HEADERS = {'Content-Type': 'image/jpeg'}
 
 # Inicializar modelo en CPU
